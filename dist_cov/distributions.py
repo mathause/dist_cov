@@ -37,7 +37,7 @@ class distribution_with_covariate:
         """
 
         raise NotImplementedError(
-            "Must return a dict with 'loc' and 'scale', or 'loc', 'scale' and 'shape'"
+            "Must return `loc, scale`, or  `shape, loc, scale` (in this order)"
         )
 
     def prior(self, args):
@@ -61,7 +61,7 @@ class distribution_with_covariate:
 
         params = self.get_params(args, self.cov)
 
-        logpdfsum = self.distribution.logpdf(self.data, **params).sum()
+        logpdfsum = self.distribution.logpdf(self.data, *params).sum()
 
         # maybe add prior
         logpdfsum += self.prior(args)
@@ -114,7 +114,8 @@ class distribution_with_covariate:
 
         params = self.get_params(args, cov)
 
-        return params["loc"]
+        # return loc
+        return params[-1]
 
     def cdf(self, event, args, cov):
         """cummulative distribution function
@@ -131,7 +132,7 @@ class distribution_with_covariate:
 
         params = self.get_params(args, cov)
 
-        return self.distribution.cdf(event, **params)
+        return self.distribution.cdf(event, *params)
 
     def ppf(self, q, args, cov):
         """Percent point function (inverse of cdf)
@@ -148,7 +149,7 @@ class distribution_with_covariate:
 
         params = self.get_params(args, cov)
 
-        return self.distribution.ppf(q, **params)
+        return self.distribution.ppf(q, *params)
 
     def sf(self, event, args, cov):
         """survival function (1 - cdf)
@@ -165,7 +166,7 @@ class distribution_with_covariate:
 
         params = self.get_params(args, cov)
 
-        return self.distribution.sf(event, **params)
+        return self.distribution.sf(event, *params)
 
     def isf(self, q, args, cov):
         """Inverse survival function (inverse of sf)
@@ -183,7 +184,7 @@ class distribution_with_covariate:
 
         params = self.get_params(args, cov)
 
-        return self.distribution.isf(q, **params)
+        return self.distribution.isf(q, *params)
 
 
 class norm_cov:
@@ -220,7 +221,7 @@ class norm_cov:
         b0, b1, scale = np.asarray(args).T
         loc = b0 + b1 * cov
 
-        return {"loc": loc, "scale": scale}
+        return loc, scale
 
     def _inital_guess(self):
         """initial guess of the params for self.fit"""
@@ -270,9 +271,9 @@ class norm_cov_scale_climexp(distribution_with_covariate):
 
         # loc0 cannot be 0, and scale must be > 0
         if loc0 == 0 or (scale <= 0).any():
-            return {"loc": np.nan, "scale": np.nan}
+            return np.nan, np.nan
 
-        return {"loc": loc, "scale": scale}
+        return loc, scale
 
 
     def _inital_guess(self):
@@ -328,7 +329,8 @@ class gev_cov(distribution_with_covariate):
             def _prior(self, args):
 
                 # return logpdf of a normal distribution
-                return ss.norm(loc=0, scale=constrain).logpdf(args["shape"])
+                # pass shape (args[0])
+                return ss.norm(loc=0, scale=constrain).logpdf(args[0])
 
             # overwrite the default priot
             self.prior = _prior
@@ -344,4 +346,4 @@ class gev_cov(distribution_with_covariate):
         shape = -shape
         loc = b0 + b1 * cov
 
-        return {"shape": shape, "loc": loc, "scale": scale}
+        return shape, loc, scale
