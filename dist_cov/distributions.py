@@ -114,7 +114,7 @@ class distribution_with_covariate:
         params = self.get_params(args, cov)
 
         # return loc
-        return params[-1]
+        return params[-2]
 
     def cdf(self, event, args, cov):
         """cummulative distribution function
