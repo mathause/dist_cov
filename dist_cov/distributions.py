@@ -1,4 +1,3 @@
-
 import numpy as np
 import scipy.stats as ss
 from scipy.optimize import minimize
@@ -275,7 +274,6 @@ class norm_cov_scale_climexp(distribution_with_covariate):
 
         return loc, scale
 
-
     def _inital_guess(self):
         """initial guess of the params for self.fit"""
 
@@ -283,7 +281,7 @@ class norm_cov_scale_climexp(distribution_with_covariate):
 
 
 class gev_cov(distribution_with_covariate):
-    """ GEV distribution with covariate for location
+    """GEV distribution with covariate for location
 
     Parameters
     ----------
@@ -317,7 +315,7 @@ class gev_cov(distribution_with_covariate):
         self.cov = cov
 
         # normal distribution with sd=0 is not valid
-        if np.isclose(constrain, 0):
+        if constrain is not None and np.isclose(constrain, 0):
             print("setting constrain to None")
             constrain = None
 
@@ -333,7 +331,7 @@ class gev_cov(distribution_with_covariate):
                 return ss.norm(loc=0, scale=constrain).logpdf(args[0])
 
             # overwrite the default priot
-            self.prior = _prior
+            gev_cov.prior = _prior
 
     def _inital_guess(self):
         return [-0.15, np.mean(self.data), 0, np.std(self.data)]
