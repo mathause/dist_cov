@@ -1,5 +1,6 @@
 import emcee
 
+
 def glm_mcmc(model, n_walker=50, burn_in=500, production=1000, print_info=True):
     """mcmc sample a scipy-derived distribution using emcee
 

@@ -1,2 +1,1 @@
-from . import distributions
-from . import sample
+from . import distributions, sample
