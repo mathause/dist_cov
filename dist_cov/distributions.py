@@ -100,7 +100,7 @@ class distribution_with_covariate:
             self.neg_loglike,
             x0=inital_guess,
             method="Nelder-Mead",
-            options={"xtol": 1e-5},
+            tol=1e-5,
         )
 
         if m.success:
