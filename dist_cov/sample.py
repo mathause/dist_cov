@@ -1,7 +1,26 @@
+import warnings
+
 import emcee
 
 
 def glm_mcmc(model, n_walker=50, burn_in=500, production=1000, print_info=True):
+    warnings.warn(
+        "`glm_mcmc` is deprecated, please use `run_mcmc` instead (which no longer "
+        "returns the `model` )"
+    )
+
+    sampler = run_mcmc(
+        model,
+        n_walker=n_walker,
+        burn_in=burn_in,
+        production=production,
+        print_info=print_info,
+    )
+
+    return model, sampler
+
+
+def run_mcmc(model, n_walker=50, burn_in=500, production=1000, print_info=True):
     """mcmc sample a scipy-derived distribution using emcee
 
     Parameters
@@ -25,7 +44,6 @@ def glm_mcmc(model, n_walker=50, burn_in=500, production=1000, print_info=True):
     params = model.fit()
 
     # get params as starting point
-
     ndim = len(params)
 
     # set up the MCMC algorithm
@@ -45,4 +63,4 @@ def glm_mcmc(model, n_walker=50, burn_in=500, production=1000, print_info=True):
 
     sampler.run_mcmc(p1, production)
 
-    return model, sampler
+    return sampler
