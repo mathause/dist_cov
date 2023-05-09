@@ -186,7 +186,7 @@ class distribution_with_covariate:
         return self.distribution.isf(q, *params)
 
 
-class norm_cov:
+class norm_cov(distribution_with_covariate):
     """normal distribution with covariate for the location
 
     Parameters
