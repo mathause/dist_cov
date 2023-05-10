@@ -4,7 +4,7 @@ authors:
 - family-names: Hauser
   given-names: Mathias
   orcid: https://orcid.org/0000-0002-0057-4878
-title: Distributions with covariates (dist_cov: version 0.1.0)
+title: "Distributions with covariates (dist_cov: version 0.1.0)"
 doi: 10.5281/zenodo.7922002
 version: v0.1.0
 date-released: 2023-05-10
