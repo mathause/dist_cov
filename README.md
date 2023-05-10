@@ -1,5 +1,7 @@
 # Distributions with covariates
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7922002.svg)](https://doi.org/10.5281/zenodo.7922002)
+
 Authors: Mathias Hauser<sup>1</sup>, Dominik Schumacher<sup>1</sup>, Sonia I. Seneviratne<sup>1</sup>
 
 <sup>1</sup>Institute for Atmospheric and Climate Science, Department of Environmental Systems Science, ETH Zurich, Zurich, Switzerland
@@ -50,7 +52,7 @@ Documentation is sparse, but check the [examples](./examples).
 
 ## Citing dist_cov
 
-Please cite Hauser et al. ([2017](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1002/2017EF000612)) if you are using dist_cov.
+Please cite Hauser et al. ([2017](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1002/2017EF000612)) or [10.5281/zenodo.7922001](https://doi.org/10.5281/zenodo.7922001) if you are using dist_cov.
 
 ## History
 
