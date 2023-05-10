@@ -19,6 +19,10 @@ class distribution_with_covariate:
 
         raise NotImplementedError()
 
+    @property
+    def param_names(self):
+        raise NotImplementedError()
+
     def get_params(self, args, cov):
         """apply covariates to params
 
@@ -205,6 +209,10 @@ class norm_cov(distribution_with_covariate):
 
     distribution = ss.norm
 
+    @property
+    def param_names(self):
+        return ["b0", "b1", "sigma"]
+
     def get_params(self, args, cov):
         """apply covariates to params
 
@@ -229,7 +237,7 @@ class norm_cov(distribution_with_covariate):
 
 
 class norm_cov_scale_climexp(distribution_with_covariate):
-    """normal distribution with covariate (for location & scale)
+    r"""normal distribution with covariate (for location & scale)
 
     Parameters
     ----------
@@ -249,6 +257,10 @@ class norm_cov_scale_climexp(distribution_with_covariate):
     - loc (mu) = loc0 * exp(a * cov / loc0)
     - scale (sigma) = scale0 * exp(a * cov / loc0)
     """
+
+    @property
+    def param_names(self):
+        return ["loc0", "scale0", "a"]
 
     def get_params(self, args, cov):
         """apply covariates to params
@@ -332,6 +344,10 @@ class gev_cov(distribution_with_covariate):
 
             # overwrite the default priot
             gev_cov.prior = _prior
+
+    @property
+    def param_names(self):
+        return ["shape", "b0", "b1", "scale"]
 
     def _inital_guess(self):
         return [-0.15, np.mean(self.data), 0, np.std(self.data)]
