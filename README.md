@@ -34,10 +34,10 @@ dist_cov is not available from pypi or conda-forge, therefore it needs to be ins
 pip install git+https://github.com/mathause/dist_cov
 ```
 
-To install the dependencies of the examples install
+To run the examples also install:
 
 ```bash
-pip install git+https://github.com/mathause/dist_cov[examples]
+pip install corner matplotlib xarray
 ```
 
 ### Install latest released version
