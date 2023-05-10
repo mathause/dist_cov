@@ -64,6 +64,9 @@ It has been employed in several rapid attribution studies under the auspices of 
 
 It further builds the starting point for modelling extremes in MESMER-X (Quilcaille et al., [2022](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2022GL099012)).
 
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
