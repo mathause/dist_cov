@@ -1,12 +1,11 @@
 import numpy as np
-import scipy.stats as ss
-from scipy.optimize import minimize
+import scipy as sp
 
 
 class distribution_with_covariate:
     """parent class for a distribution with covariate"""
 
-    # set the distribution, e.g. `ss.norm`
+    # set the distribution, e.g. `sp.stats.norm`
     distribution = None
 
     def __init__(self, data, cov):
@@ -100,7 +99,7 @@ class distribution_with_covariate:
         inital_guess = self._inital_guess()
 
         # find the best estimate by minimalizing the log likelyhood
-        m = minimize(
+        m = sp.optimize.minimize(
             self.neg_loglike,
             x0=inital_guess,
             method="Nelder-Mead",
@@ -207,7 +206,7 @@ class norm_cov(distribution_with_covariate):
     - sigma = scale
     """
 
-    distribution = ss.norm
+    distribution = sp.stats.norm
 
     @property
     def param_names(self):
@@ -319,7 +318,7 @@ class gev_cov(distribution_with_covariate):
     - constrain /2 = standard deviation of this gaussian prior
     """
 
-    distribution = ss.genextreme
+    distribution = sp.stats.genextreme
 
     def __init__(self, data, cov, constrain=None):
 
@@ -340,7 +339,7 @@ class gev_cov(distribution_with_covariate):
 
                 # return logpdf of a normal distribution
                 # pass shape (args[0])
-                return ss.norm(loc=0, scale=constrain).logpdf(args[0])
+                return sp.stats.norm(loc=0, scale=constrain).logpdf(args[0])
 
             # overwrite the default priot
             gev_cov.prior = _prior
