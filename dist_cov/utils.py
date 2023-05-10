@@ -10,7 +10,7 @@ def param_range(flatchain, alpha=0.05):
 
     # these bounds are always two-sided
     q = alpha / 2
-    return np.quantile(flatchain, q=[0.5, q, 1 - q])
+    return np.nanquantile(flatchain, q=[0.5, q, 1 - q])
 
 
 def fmt_param_range(flatchain, alpha=0.05, precision=3):
