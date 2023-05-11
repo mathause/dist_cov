@@ -20,6 +20,16 @@ $\sigma' = \sigma$
 
 As no such distribution is available in python we adapt distributions in scipy (e.g. [scipy.stats.norm](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html)).
 
+### Markov chain Monte Carlo (MCMC) sampler
+
+The parameter uncertainty is estimated with [emcee](https://emcee.readthedocs.io/en/stable/) - an MCMC sampler - see `dist_cov.sample.run_mcmc`. Also check it's website for a good overview. Of course any other MCMCM sampler can be used as well.
+
+I usually describe this as follows: "We calculate uncertainties in a Bayesian setting and use a Markov Chain MonteCarlo (MCMC) sampler that is affine-transformation invariant (Goodman & Weare, [2010](https://doi.org/10.2140/camcos.2010.5.6); Foreman-Mackey et al., [2013](https://doi.org/10.1086/67006)) to estimate the parameters of the distributions. Starting from non-informative<sup>*</sup> priors, the converged posterior distributions (50,000<sup>**</sup> non-independent samples) give an estimate of the parameteruncertainty.
+
+<sup>*</sup> Not all priors are non-informative (i.e. when setting a `constrain` in `dist_cov.distributions.gev_cov`)!
+
+<sup>**</sup> This is `n_walker * production` in `dist_cov.sample.run_mcmc`
+
 
 ## Installation
 
@@ -54,6 +64,9 @@ Documentation is sparse, but check the [examples](./examples).
 
 Please cite Hauser et al. ([2017](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1002/2017EF000612)) or [10.5281/zenodo.7922001](https://doi.org/10.5281/zenodo.7922001) if you are using dist_cov.
 
+If you use [emcee](https://emcee.readthedocs.io/en/stable/) also consider citing Foreman-Mackey et al. ([2013](https://doi.org/10.1086/67006)) and/ or Goodman & Weare ([2010](https://doi.org/10.2140/camcos.2010.5.6)).
+
+
 ## History
 
 This code was originally developed for Hauser et al. ([2017](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1002/2017EF000612)) based on the approach described in Coles ([2001](https://link.springer.com/book/10.1007/978-1-4471-3675-0); Chapter 3).
@@ -79,6 +92,8 @@ This project is published under a MIT license.
 
 - Ciavarella, A., Cotterill, D., Stott, P., ... Hauser, M., et al. Prolonged Siberian heat of 2020 almost impossible without human influence. Climatic Change 166, 9 (2021). https://doi.org/10.1007/s10584-021-03052-w
 - Coles, S. (2001), An Introduction to Statistical Modeling of Extreme Values, vol. 208, Springer, London.
+- Foreman-Mackey, D., Hogg, D. W., Lang, D., & Goodman, J. (2013). emcee: The MCMC hammer.Publications of the Astronomical Society ofthe Pacific,125, 306–312. https://doi.org/10.1086/67006
+- Goodman, J., & Weare, J. (2010). Ensemble samplers with affine invariance.Communications in Applied Mathematics and ComputationalScience,5(1), 65–80. https://doi.org/10.2140/camcos.2010.5.6
 - Hauser, M., Gudmundsson, L., Orth, R., Jézéquel, A., Haustein, K., Vautard, R., van Oldenborgh, G.J., Wilcox, L. and Seneviratne, S.I. (2017), Methods and Model Dependency of Extreme Event Attribution: The 2015 European Drought. Earth's Future, 5: 1034-1043. https://doi.org/10.1002/2017EF000612
 - Philip, S. Y., Kew, S. F., van Oldenborgh, G. J., Anslow, F. S., Seneviratne, S. I., Vautard, R., Coumou, D., Ebi, K. L., Arrighi, J., Singh, R., van Aalst, M., Pereira Marghidan, C., Wehner, M., Yang, W., Li, S., Schumacher, D. L., Hauser, M., Bonnet, R., Luu, L. N., Lehner, F., Gillett, N., Tradowsky, J. S., Vecchi, G. A., Rodell, C., Stull, R. B., Howard, R., and Otto, F. E. L.: Rapid attribution analysis of the extraordinary heat wave on the Pacific coast of the US and Canada in June 2021, Earth Syst. Dynam., 13, 1689–1713, https://doi.org/10.5194/esd-13-1689-2022, 2022.
 - Quilcaille, Y., Gudmundsson, L., Beusch, L., Hauser, M., & Seneviratne, S. I. (2022). Showcasing MESMER-X: Spatially resolved emulation of annual maximum temperatures of Earth System Models. Geophysical Research Letters, 49, e2022GL099012. https://doi.org/10.1029/2022GL099012
