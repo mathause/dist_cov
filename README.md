@@ -8,7 +8,7 @@ Authors: Mathias Hauser<sup>1</sup>, Dominik Schumacher<sup>1</sup>, Sonia I. Se
 
 Conditional distributions with covariates
 
-**Warning**: this package does currently not have any tests.
+:warning: **Warning**: this package does currently not have any tests.
 
 ## Approach
 
