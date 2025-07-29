@@ -24,7 +24,7 @@ As no such distribution is available in python we adapt distributions in scipy (
 
 The parameter uncertainty is estimated with [emcee](https://emcee.readthedocs.io/en/stable/) - an MCMC sampler - see `dist_cov.sample.run_mcmc`. Also check it's website for a good overview. Of course any other MCMCM sampler can be used as well.
 
-I usually describe this as follows: "We calculate uncertainties in a Bayesian setting and use a Markov Chain MonteCarlo (MCMC) sampler that is affine-transformation invariant (Goodman & Weare, [2010](https://doi.org/10.2140/camcos.2010.5.6); Foreman-Mackey et al., [2013](https://doi.org/10.1086/67006)) to estimate the parameters of the distributions. Starting from non-informative<sup>*</sup> priors, the converged posterior distributions (50,000<sup>**</sup> non-independent samples) give an estimate of the parameteruncertainty.
+I usually describe this as follows: "We calculate uncertainties in a Bayesian setting and use a Markov Chain MonteCarlo (MCMC) sampler that is affine-transformation invariant (Goodman & Weare, [2010](https://doi.org/10.2140/camcos.2010.5.6); Foreman-Mackey et al., [2013](https://doi.org/10.1086/67006)) to estimate the parameters of the distributions. Starting from non-informative<sup>*</sup> priors, the converged posterior distributions (50,000<sup>**</sup> non-independent samples) give an estimate of the parameter uncertainty.
 
 <sup>*</sup> Not all priors are non-informative (i.e. when setting a `constrain` in `dist_cov.distributions.gev_cov`)!
 
